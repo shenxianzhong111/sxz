@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>login</title>
+	{css href='__CSS__/normalize.css,__CSS__/demo.css,__CSS__/component.css,__CSS__/my.css'}
+	{js href='__JS__/jquery-3.4.1.min.js,__JS__/vue.min.js,__JS__/login.js'}
+<!--<link rel="stylesheet" type="text/css" href="css/normalize.css" />-->
+	<!--<link rel="stylesheet" type="text/css" href="css/demo.css" />-->
+	<!--&lt;!&ndash;必要样式&ndash;&gt;-->
+	<!--<link rel="stylesheet" type="text/css" href="css/component.css" />-->
+	<!--[if IE]>
+<script src="__JS__/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box">
+						<h3>欢迎你</h3>
+						<form id="login" action="#" name="f" method="post">
+							<div  id="account_box" class="input_outer">
+								<span class="u_user"></span>
+								<input id="account" name="logname" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入11位数字账户">
+							</div>
+							<div  id="password_box" class="input_outer">
+								<span class="us_uer"></span>
+								<input id="password" name="logpass" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+							</div>
+							<div  id="test_box" class="input_outer" style="display: none">
+								<span class="us_uer"></span>
+								<input id="test" name="logtest" value="" class="test_text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="text" placeholder="请输入验证码">
+								<img class="test" src="{:captcha_src()}" width="165"  onclick="this.src='{:captcha_src()}?'+Math.random();" alt="captcha" />
+							</div>
+							<div id="login_button" class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="__JS__/TweenLite.min.js"></script>
+		<script src="__JS__/EasePack.min.js"></script>
+		<script src="__JS__/rAF.js"></script>
+		<script src="__JS__/demo-1.js"></script>
+		<div style="text-align:center;">
+<p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+	</body>
+</html>

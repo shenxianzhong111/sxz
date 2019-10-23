@@ -1,0 +1,174 @@
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>新建账号</legend>
+</fieldset>
+    <form class="layui-form" action="" lay-filter="createAccountForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="account" required lay-verify="required" value="201990" autocomplete="off" class="layui-input" v-model="account.val" >
+            </div>
+            <div id="aa" class="layui-form-mid layui-word-aux"  v-model="account.color">请填写十位数账号，如以下格式：201990xxxx</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" value="000" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">请填写3-6位密码，密码由数字和大小写字母组成,默认为“000”</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password1" required lay-verify="required" value="000" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">两次输入密码必须一致，默认为“000”</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否批量</label>
+            <div class="layui-input-block">
+                <input id="isD" lay-filter="createAccount" type="checkbox" name="isD" lay-skin="switch" lay-text="ON|OFF" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">追加方式</label>
+            <div class="layui-input-block">
+                <input type="radio" name="style" value="-1" title="前缀">
+                <input type="radio" name="style" value="1" title="后缀" checked>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建个数</label>
+            <div class="layui-input-block" style="width: 250px">
+                <select name="number" lay-verify="required" >
+                    <!--<option value=""></option>-->
+                    <option value="1">创建一个账号</option>
+                    <option value="2">创建二个账号</option>
+                    <option value="3">创建三个账号</option>
+                    <option value="4">创建四个账号</option>
+                    <option value="5">创建五个账号</option>
+                    <option value="10">创建十个账号</option>
+                    <option value="15">创建十五个账号</option>
+                    <option value="20">创建二十个账号</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">生成账号</label>
+            <div class="layui-input-block" style="width: 250px">
+                <textarea name="end"  placeholder="自己输入账号，账号之间用‘，’隔开，或者点击下面的批量生成账号自动生成" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-btn" lay-submit lay-filter="aotuAccount">批量生成账号</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <div class="layui-btn" lay-submit lay-filter="createAccount">立即提交</div>
+            </div>
+        </div>
+    </form>
+    <script>
+        //Demo
+        $(function () {
+            var app=new Vue({
+                el:'.newAccount',
+                data: {
+                    account: {
+                        val: '',
+                        regular: /^(201490)[0-9]{4}$/,
+                        color:''
+                    },
+                    password: {
+                        val: '',
+                        regular: /^[0-9a-zA-Z]{3,6}$/,
+                        color:''
+                    },
+                    password1: {
+                        val: '',
+                        regular: /^[0-9a-zA-Z]{3,6}$/,
+                        color:''
+                    },
+                    color:{
+                        red:false,
+                        green:false
+                    }
+                },
+                watch: {
+                    'account.val':function(val,oldval){
+                        // if(this.account.regular.test(val)){
+                        //     $('#aa').css('color','green')
+                        // }else {
+                        //     $('#aa').css('color','red')
+                        // }
+
+                    }
+                }
+            })
+
+
+
+
+        })
+        //生成随机数的函数
+        function  randomChar(number,account) {
+            var x = "0123456789";
+            var tmps = "";
+            for (var j=0;j<number;j++){
+                var tmp=""
+                for (var i = 0; i < 4; i++) {
+
+                    tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+                    if(i==3) {tmp=account+tmp+','}
+                }
+                tmps+=tmp
+            }
+            return tmps
+        }
+
+            //layui操作表单
+            layui.use(['form','layer'], function(){
+                var form = layui.form;
+                var layer = layui.layer;
+                //监听自动生成账号提交按钮
+                form.on('submit(aotuAccount)',function () {
+
+                    //获取表单数据
+                    var data1=form.val("createAccountForm")
+                    //生成随机账号账号
+                    if(data1.isD==undefined){
+                        form.val("createAccountForm",{end:randomChar(1,data1.account)})
+                    }else {
+                        form.val("createAccountForm",{end:randomChar(data1.number,data1.account)})
+                    }
+                })
+                //监听新建账号提交按钮
+
+                form.on('submit(createAccount)', function(){
+                    data1=form.val("createAccountForm")
+                     $.post('{:url("boss/index/register")}',{account:data1.end},function (data) {
+                         layer.open({
+                             content:data.success+','+data.fail,
+                             time: 3000,
+                             anim:2,
+                             icon:0,
+                             closeBtn: 0,
+                             success:function () {
+                                 $('.layui-btn').css("background","gray")
+                             },
+                             end:function () {
+                                 $('.layui-btn').css("background","#009688")
+                             }
+                         })
+                     })
+                    //layer.msg(JSON.stringify(data.field));
+                    //return false;
+                });
+
+            });
+
+
+    </script>
+</div>
