@@ -1,0 +1,54 @@
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("./../img/kjashdkfjha.jpg ");
+    /*background-size: 100%;*/
+}
+.top{
+    height:20%;
+    text-align: center;
+    color: white;
+    background: #002DFF;
+    font-size: 50px;
+}
+.redColor{
+    color: red;
+}
+
+.in{
+    border: #9A0000 solid 2px;
+    height: 20px;
+}
+
+.greenColor{
+    color: green;
+}
+#login{
+    border:black solid 5px ;
+    width: 300px;
+    height: 200px;
+    position: relative;
+    top:100px;
+    left:calc( 50% - 150px);
+    background: #6666FF;
+}
+
+#f{
+    position: relative;
+    top:20px;
+    left:calc( 50% - 150px);
+    text-align: center;
+}
+
+input[type=submit]{
+    width: 100px;
+    color: black;
+    background: aqua;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 20px 20px 20px 20px;
+
+}
